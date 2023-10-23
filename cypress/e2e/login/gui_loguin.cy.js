@@ -19,19 +19,19 @@ describe('Teste Funcional com Cypress', () => {
     });
 
     
-    it.only('CT001 Deve acessar a pagina com sucesso', () => {
+    it('CT001 Deve acessar a pagina com sucesso', () => {
         cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
 
     });
 
-    it.only('CT002 Deve realizar o login com sucesso', () => {
+    it('CT002 Deve realizar o login com sucesso', () => {
         cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
         cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type('Admin');
         cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type('admin123');
         cy.get('.oxd-button').click();
     });
 
-    it.only('CT003 Deve acessar o (My Info)', () => {
+    it('CT003 Deve acessar o (My Info)', () => {
         cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
         cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type('Admin');
         cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type('admin123');
@@ -46,8 +46,12 @@ describe('Teste Funcional com Cypress', () => {
         cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type('admin123');
         cy.get('.oxd-button').click();
         cy.contains('My Info').click();
-        cy.contains('Colonel Sanders');
-        cy.get(':nth-child(1) > .oxd-grid-3 > .oxd-grid-item > .oxd-input-group > :nth-child(2) > .oxd-input').click().type('Carlos');
+        cy.contains('Ivona Nikoloska');
+        cy.get(':nth-child(1) > .oxd-form > .oxd-form-actions > .oxd-button').click().type('Carlos');
+        cy.wait(5000);
+        cy.get(':nth-child(1) > .oxd-form > .oxd-form-actions > .oxd-button').click();
+        cy.wait(5000);
+        cy.get('.--name-grouped-field > :nth-child(1) > :nth-child(2) > .oxd-input').click().clear().type('Luan');
     });
 
 
