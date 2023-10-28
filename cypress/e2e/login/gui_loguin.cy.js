@@ -8,9 +8,10 @@ describe('Abrindo meu primeiro site no Cypress', () => {
     cy.contains('Aproximadamente');
   })
 
-  it.only('Realizando login em tela do iphone', () => {]
+  it('Realizando login em tela do iphone', () => {
     // verifica a posicao da tela do iphone se esta na horizontal cy.viewport('iphone-x', 'landscape'); / cy.viewport('iphone-x', 'portrait');
     cy.viewport('iphone-x', 'landscape'); 
+    cy.viewport('iphone-x', 'portrait');
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
     cy.get('[name="username"]').click().type('Admin');
     cy.get('[name="password"]').click().type('admin123');
@@ -66,6 +67,17 @@ describe('Abrindo meu primeiro site no Cypress', () => {
     cy.get(':nth-child(1) > .oxd-grid-3 > .oxd-grid-item > .oxd-input-group > :nth-child(2) > .oxd-input').clear().type('Carlos');
     //cy.wait('5000')
     cy.get(':nth-child(1) > .oxd-form > .oxd-form-actions > .oxd-button').click();
+    
+  })
+
+  it.only('Realizando login em tela do iphone', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get('[name="username"]').click().type('Admin');
+    cy.get('[name="password"]').click().type('admin123');
+    cy.get('.oxd-button').click();
+
+    // Verifica qual a cor do elemento na pagina site para calculo = https://www.w3schools.com/colors/colors_picker.asp
+    cy.get('.orangehrm-attendance-card-state').should('have.css', 'color', 'rgb(255, 123, 29)')
     
   })
 })
