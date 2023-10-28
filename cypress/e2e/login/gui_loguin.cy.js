@@ -1,90 +1,70 @@
 /// <reference types="Cypress"/>
+describe('Abrindo meu primeiro site no Cypress', () => {
+  it('Abrindo google e realizando pesquisa', () => {
+    cy.visit('https://google.com')
+    cy.get('[name="q"]').type('Aula de teclado {enter}');
+    cy.contains('Aproximadamente');
+    cy.get('#APjFqb').clear().type('Aula de violao {enter}');
+    cy.contains('Aproximadamente');
+  })
 
-describe('Teste Funcional com Cypress', () => {
-
-
-    it('Deve acessar a pagina do google e verificar se aparece o nome "Aproximadamente"', () => {
-        cy.visit("https://www.google.com/");
-        cy.get('#APjFqb').type('aula de teclado {enter}');
-        cy.contains('Aproximadamente')
-
-    });
-
-    it('Deve realizar o login com sucesso na pagina do Cypress', () => {
-        cy.visit("https://example.cypress.io/commands/actions")
-        cy.get('#password1')
-            .type('123').click()
-            .should('have.value', '123')
-
-    });
-
+  it('Realizando login em tela do iphone', () => {
+    cy.viewport('iphone-x');
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get('[name="username"]').click().type('Admin');
+    cy.get('[name="password"]').click().type('admin123');
+    cy.get('.oxd-button').click();
     
-    it('CT001 Deve acessar a pagina com sucesso', () => {
-        cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+  })
 
-    });
+  it('Verificar o titulo da pagina', () => {
+    //cy.viewport('iphone-x');
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get('[name="username"]').click().type('Admin');
+    cy.get('[name="password"]').click().type('admin123');
+    cy.get('.oxd-button').click();
+    cy.title().should('eq', 'OrangeHRM');
+    cy.title().should('include', 'OrangeHRM');
+  })
 
-    it('CT002 Deve realizar o login com sucesso', () => {
-        cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
-        cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type('Admin');
-        cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type('admin123');
-        cy.get('.oxd-button').click();
-    });
+  //Codigo de assertion (como o codigo deve funcionar para algo especifico)
+  it.only('Assertion -existe', () => {
+    //cy.viewport('iphone-x');
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get('[name="username"]').click().type('Admin');
+    cy.get('[name="password"]').click().type('admin123');
+    cy.get('.oxd-button').click();
+    cy.title().should('eq', 'OrangeHRM');
+    cy.title().should('include', 'OrangeHRM');
+    cy.get(':nth-child(6) > .oxd-main-menu-item').click();
+    //verifica se existe o nome ou elemento na pagiga
+    cy.get(':nth-child(1) > .oxd-form > :nth-child(1) > .oxd-grid-3 > .oxd-grid-item > .oxd-input-group > .oxd-input-group__label-wrapper > .oxd-label')
+    .should('exist')
+    .should('be.visible')
+    .should('contain', 'Nickname')
+  })
 
-    it('CT003 Deve acessar o (My Info)', () => {
-        cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
-        cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type('Admin');
-        cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type('admin123');
-        cy.get('.oxd-button').click();
-        cy.contains('My Info').click();
-        cy.contains('Colonel Sanders');
-    });
+  it('Realizando login', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get('[name="username"]').click().type('Admin');
+    cy.get('[name="password"]').click().type('admin123');
+    cy.get('.oxd-button').click();
+    cy.contains('Paul Collings');
+    cy.get('.oxd-userdropdown-name').contains('John18747 Smith18747');
+  })
 
-    it.only('CT004 Incluindo nickname dentro de (My Info)', () => {
-        cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
-        cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type('Admin');
-        cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type('admin123');
-        cy.get('.oxd-button').click();
-        cy.contains('My Info').click();
-        cy.contains('Ivona Nikoloska');
-        cy.get(':nth-child(1) > .oxd-form > .oxd-form-actions > .oxd-button').click().type('Carlos');
-        cy.wait(5000);
-        cy.get(':nth-child(1) > .oxd-form > .oxd-form-actions > .oxd-button').click();
-        cy.wait(5000);
-        cy.get('.--name-grouped-field > :nth-child(1) > :nth-child(2) > .oxd-input').click().clear().type('Luan');
-    });
-
-
-
-    it('Deve clicar no link e digitar email no campo de email', () => {// Descrição
-        cy.visit("https://example.cypress.io")//Visitar o site
-        cy.contains('type').click()//Encontra o texto "Type" e clica nele
-        cy.url().should('include', '/commands/actions')//verifica se a url acessada apos clicar no type foi incluido (/commands/actions) 
-        cy.get('.action-email').type('fake@email.com')//Pegou o campo email 
-        cy.get('.action-email').should('have.value', 'fake@email.com')//pega o campo email e verifica se o email digitado foi o (fake@email.com)
-
-
-    });
-
-
-
-
-
-    it('Marca como completo e apaga lista de completos', () => {
-        cy.visit("http://todomvc-app-for-testing.surge.sh/")//Visitar o site
-        cy.get('.new-todo').type('Fazer backup{enter}')
-        cy.get('.toggle').click() // marca como completo
-        cy.contains('Clear completed')// Verifica se tem esse texto 
-        cy.get('.todo-list li').should('have.length', 0)//possui 0 itens
-    });
-
-
-    it('incluir  dois itens e conferir o nome do ultimo item e do primeiro item ', () => {
-        cy.visit('https://example.cypress.io/todo');
-        cy.get('.new-todo').type('1 nome {enter}');
-        cy.get('.new-todo').type('2 nome {enter}');
-        cy.get('.todo-list li').first().should('have.text', 'Pay electric bill');
-        cy.get('.todo-list li').last().should('have.text', '2 nome');
-
-    });  
-});
+  it('Teste de atualização do (My Info)', () => {
+   // cy.viewport('iphone-x'); / cy.viewport(1024, 768); teste em celular ou outra resolução de tela
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get('[name="username"]').click().type('Admin');
+    cy.get('[name="password"]').click().type('admin123');
+    cy.get('.oxd-button').click();
+    cy.contains('adolf hitler');
+    cy.get('.oxd-userdropdown-name').contains('adolf hitler');
+    cy.get(':nth-child(6) > .oxd-main-menu-item').click();
+    cy.get(':nth-child(1) > .oxd-grid-3 > .oxd-grid-item > .oxd-input-group > :nth-child(2) > .oxd-input').clear().type('Carlos');
+    //cy.wait('5000')
+    cy.get(':nth-child(1) > .oxd-form > .oxd-form-actions > .oxd-button').click();
+    
+  })
+})
