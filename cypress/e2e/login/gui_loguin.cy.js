@@ -8,8 +8,9 @@ describe('Abrindo meu primeiro site no Cypress', () => {
     cy.contains('Aproximadamente');
   })
 
-  it('Realizando login em tela do iphone', () => {
-    cy.viewport('iphone-x');
+  it.only('Realizando login em tela do iphone', () => {]
+    // verifica a posicao da tela do iphone se esta na horizontal cy.viewport('iphone-x', 'landscape'); / cy.viewport('iphone-x', 'portrait');
+    cy.viewport('iphone-x', 'landscape'); 
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
     cy.get('[name="username"]').click().type('Admin');
     cy.get('[name="password"]').click().type('admin123');
@@ -28,7 +29,7 @@ describe('Abrindo meu primeiro site no Cypress', () => {
   })
 
   //Codigo de assertion (como o codigo deve funcionar para algo especifico)
-  it.only('Assertion -existe', () => {
+  it('Assertion -existe', () => {
     //cy.viewport('iphone-x');
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
     cy.get('[name="username"]').click().type('Admin');
