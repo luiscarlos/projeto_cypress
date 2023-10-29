@@ -137,3 +137,5 @@ describe('Abrindo meu primeiro site no Cypress', () => {
 
 //obs : npx Cypress run --spec C:\temp\projeto_cypress\cypress\e2e\login  
 // comando apenas para rodar um teste especifico via linha de comando
+// https://github.com/RMajowka/Cypress-para-iniciantes 
+
