@@ -98,7 +98,7 @@ describe('Abrindo meu primeiro site no Cypress', () => {
     
   })
 
-  it.only('Cypress e CSS - Como verificar a fonte do texto usando Cypress', () => {
+  it('Cypress e CSS - Como verificar a fonte do texto usando Cypress', () => {
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
 
     cy.get('[name="username"]').click().type('Admin');
@@ -116,4 +116,24 @@ describe('Abrindo meu primeiro site no Cypress', () => {
     .should('have.css', 'font-family', 'Nunito Sans,sans-serif')
     
   })
+
+  it.only('Cypress e CSS - Como verificar uma imagem src usando Cypress', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+
+    cy.get('[name="username"]').click().type('Admin');
+    cy.get('[name="password"]').click().type('admin123');
+    cy.get('.oxd-button').click();
+
+    
+    cy.get('.orangehrm-attendance-card-state')
+    .should('have.css', 'color', 'rgb(255, 123, 29)')
+
+    // Pega a imagem e ver se esta no local 
+    .should('have.css','font-size', '12px')
+    cy.get('.employee-image').should('have.attr', 'src', '../pim/viewPhoto/empNumber/7')
+    
+  })
 })
+
+//obs : npx Cypress run --spec C:\temp\projeto_cypress\cypress\e2e\login  
+// comando apenas para rodar um teste especifico via linha de comando
