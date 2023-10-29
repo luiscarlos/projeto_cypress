@@ -82,7 +82,7 @@ describe('Abrindo meu primeiro site no Cypress', () => {
   })
 
 
-  it.only('Cypress e CSS - Como verificar o tamanho do texto usando Cypress', () => {
+  it('Cypress e CSS - Como verificar o tamanho do texto usando Cypress', () => {
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
 
     cy.get('[name="username"]').click().type('Admin');
@@ -95,6 +95,25 @@ describe('Abrindo meu primeiro site no Cypress', () => {
 
     // Verifica qual o tamanho do elemento e a cor 
     .should('have.css','font-size', '12px')
+    
+  })
+
+  it.only('Cypress e CSS - Como verificar a fonte do texto usando Cypress', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+
+    cy.get('[name="username"]').click().type('Admin');
+    cy.get('[name="password"]').click().type('admin123');
+    cy.get('.oxd-button').click();
+
+    
+    cy.get('.orangehrm-attendance-card-state')
+    .should('have.css', 'color', 'rgb(255, 123, 29)')
+
+    // Verifica qual o tamanho do elemento e a cor 
+    .should('have.css','font-size', '12px')
+
+    //Verificando o tipo da letra do elemento
+    .should('have.css', 'font-family', 'Nunito Sans,sans-serif')
     
   })
 })
